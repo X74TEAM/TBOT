@@ -35,8 +35,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     user = update.effective_user
-    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nPrigMan is a cutting-edge financial platform where users can earn tokens by leveraging the mining apps various features. The majority of PrigMan Token (PM) distribution will occur among the players here.\n\n Do you have friends, relatives, or co-
- workers?\nBring them all into the game.\nMore buddies, more coins!', reply_markup=reply_markup)
+    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game\nMore buddies, more coins!',reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
