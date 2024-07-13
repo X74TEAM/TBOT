@@ -30,6 +30,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
     [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
     [InlineKeyboardButton("Help ", url="http://t.me/PrigManBot/app?startapp=command")],
+    ],
+    [InlineKeyboardButton("Invite Your Friend ", url="https://t.me/share/url?url=https://t.me/{context.bot.username}?start={user_id}")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
