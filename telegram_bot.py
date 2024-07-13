@@ -28,7 +28,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
     [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
-    [InlineKeyboardButton(text='Join Community ', url='https://t.me/share/url?url=%reflink%')],
+    [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
     [InlineKeyboardButton("Help ", callback_data="Use /help to helping you this bot.")],
     ]
 
