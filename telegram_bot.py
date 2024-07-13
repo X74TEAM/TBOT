@@ -29,7 +29,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
     [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
     [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
-    [InlineKeyboardButton("Help ", callback_data="Use /help to helping you this bot.")],
+    [InlineKeyboardButton("Help ", url="http://t.me/PrigManBot/app?startapp=command")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
