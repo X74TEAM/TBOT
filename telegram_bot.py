@@ -27,15 +27,15 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
-    [InlineKeyboardButton(text='Start Now! 🎲', url='http://t.me/xEarningBot/run')],
-    [InlineKeyboardButton(text='Join Community 🫂', url='https://t.me/gotaptap')],
-    [InlineKeyboardButton("Help 😣", callback_data="/help")],
+    [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
+    [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
+    [InlineKeyboardButton("Help ", callback_data="/help")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     user = update.effective_user
-    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to xEarningBot!</b> \nAre you ready to Earn using our bot.?', reply_markup=reply_markup)
+    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nPrigMan is a cutting-edge financial platform where users can earn tokens by leveraging the mining app's various features. The majority of PrigMan Token (PM) distribution will occur among the players here.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game.\nMore buddies, more coins.', reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -58,7 +58,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(update.message.text)
     
 def main() -> None:
-    application = Application.builder().token("7201274655:AAGtMzZy40Lu4A1T3v_42hW1GrOizHQMZu8").build()
+    application = Application.builder().token("6866396151:AAFRNNZLyHb8EFZEV1DA3nA_BBnk968UJqc").build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button))
