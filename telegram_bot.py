@@ -29,13 +29,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
     [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
     [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
-    [InlineKeyboardButton("Help ", callback_data="/help")],
+    [InlineKeyboardButton("Help ", callback_data="Use /help to helping you this bot.")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
+    referral_code = create_referral_code(sender_username)
     user = update.effective_user
-    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game\nMore buddies, more coins!',reply_markup=reply_markup)
+    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game\nMore buddies, more coins!\n\nYour refer link:\nhttps://t.me/PrigManBot?start='+ referral_code', reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -51,7 +52,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Displays info on how to use the bot."""
-    await update.message.reply_text("Use /start to run this bot.")
+    await update.message.reply_text("Use /start to run this bot.\n\nIf you need any help please Join our community or contact to The PrigMan, he is the owner of this bot")
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
