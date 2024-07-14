@@ -27,10 +27,9 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
-    [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
-    [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
-    [InlineKeyboardButton("Help ", url="http://t.me/PrigManBot/app?startapp=command")],
-    [InlineKeyboardButton("Invite Your Friend ", url="https://t.me/share/url?url=https://t.me/{context.bot.username}?start={user_id}")],
+    [InlineKeyboardButton(text='Start Now!', url='http://t.me/PrigManBot/app')],
+    [InlineKeyboardButton(text='Join Community', url='https://t.me/ThePrigMan')],
+    [InlineKeyboardButton("Help", callback_data="Hello {user.mention_html()}!\nHow can I help you.?\n\nUse \help this command for helping you by autobot.!")],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
