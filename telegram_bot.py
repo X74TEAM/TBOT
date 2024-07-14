@@ -23,13 +23,12 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
-user = update.effective_user
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
     [InlineKeyboardButton(text='Start Now!', url='http://t.me/PrigManBot/app')],
     [InlineKeyboardButton(text='Join Community', url='https://t.me/ThePrigMan')],
-   [InlineKeyboardButton("Help", callback_data="Hello {user.mention_html()}!\nHow can I help you.?\n\nUse \help this command for helping you by autobot.!")],
+   [InlineKeyboardButton("Help", callback_data="Hello User!\nHow can I help you.?\n\nUse \help this command for helping you by autobot.!")],
     ]
 
 
