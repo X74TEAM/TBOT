@@ -23,19 +23,19 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
     keyboard = [
-    [InlineKeyboardButton(text='Start Now!', url='http://t.me/PrigManBot/app')],
-    [InlineKeyboardButton(text='Join Community', url='https://t.me/ThePrigMan')],
-   [InlineKeyboardButton("Help", callback_data="Hello User!\nHow can I help you.?\n\nUse \help this command for helping you by autobot.!")],
+    [InlineKeyboardButton(text='Start Now! ', url='http://t.me/PrigManBot/app')],
+    [InlineKeyboardButton(text='Join Community ', url='https://t.me/ThePrigMan')],
+  [InlineKeyboardButton("Help ", callback_data="/help")],
     ]
-
-
+    
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     user = update.effective_user
-    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game\nMore buddies, more coins!',reply_markup=reply_markup)
+    await update.message.reply_html(f'<b>Hey, {user.mention_html()}! Welcome to PrigMan!</b> \nTap on the coin and see your balance rise.\n\nDo you have friends, relatives, or co-workers?\nBring them all into the game\nMore buddies, more coins!', reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
