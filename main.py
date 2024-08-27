@@ -1,3 +1,9 @@
+import logging
+
+from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, ConversationHandler, CallbackContext, filters
+
 import time
 import json
 import telebot
