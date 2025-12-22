@@ -1,322 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Earn & Reward App</title>
+    <title>Noman Ad Earning</title>
     
+    <!-- Google Fonts (Nunito) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
+    <!-- Internal CSS -->
     <style>
         /* Google Font Import */
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
         /* CSS Variables for Theming */
         :root {
             --font-family: 'Nunito', sans-serif;
-            --bg-color-light: #f7f7fa; 
-            --bg-gradient-light: linear-gradient(180deg, #f7f7fa 0%, #e9e9ee 100%); /* New Gradient */
+            --bg-color-light: #f4f4f9;
             --secondary-bg-light: #ffffff;
-            --text-color-light: #17171a;
-            --subtle-text-light: #6c757d;
-            --primary-color-light: #1a73e8; 
-            --primary-color-hover-light: #1669d7;
-            --border-color-light: #e0e0e0; /* Slightly darker border */
-            --shadow-light: 0 6px 16px rgba(0, 0, 0, 0.1); /* Stronger shadow */
-
-            --bg-color-dark: #1f1f1f;
-            --bg-gradient-dark: linear-gradient(180deg, #1f1f1f 0%, #121212 100%); /* New Gradient */
-            --secondary-bg-dark: #2a2a2a;
-            --text-color-dark: #f0f0f0;
-            --subtle-text-dark: #a0a0a0;
-            --primary-color-dark: #4285f4; 
-            --primary-color-hover-dark: #357ae8;
-            --border-color-dark: #3b3b3b;
-            --shadow-dark: 0 6px 16px rgba(0, 0, 0, 0.6); 
+            --text-color-light: #1c1c1e;
+            --subtle-text-light: #6d6d72;
+            --primary-color-light: #007aff;
+            --border-color-light: #e0e0e0;
+            --bg-color-dark: #121212;
+            --secondary-bg-dark: #1c1c1e;
+            --text-color-dark: #ffffff;
+            --subtle-text-dark: #8e8e93;
+            --primary-color-dark: #0a84ff;
+            --border-color-dark: #38383a;
+            --premium-color: #ff9500;
+            --admin-color: #d63384;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
         }
 
         /* Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: var(--font-family);
-            transition: all 0.3s;
+            transition: background-color 0.3s, color 0.3s;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Theme Styles - ENHANCED BACKGROUND */
-        body.light-theme { 
-            background: var(--bg-gradient-light); 
-            color: var(--text-color-light); 
-        }
-        body.dark-theme { 
-            background: var(--bg-gradient-dark); 
-            color: var(--text-color-dark); 
-        }
+        /* Theme Styles */
+        body.light-theme { background-color: var(--bg-color-light); color: var(--text-color-light); }
+        body.dark-theme { background-color: var(--bg-color-dark); color: var(--text-color-dark); }
         #app { max-width: 500px; margin: 0 auto; padding-bottom: 70px; }
 
+        /* App Header */
+        .app-header { 
+            padding: 10px 15px; 
+            text-align: center; 
+            border-bottom: 1px solid;
+            position: relative;
+        }
+        .light-theme .app-header { border-bottom-color: var(--border-color-light); }
+        .dark-theme .app-header { border-bottom-color: var(--border-color-dark); }
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .light-theme .app-name { color: var(--primary-color-light); }
+        .dark-theme .app-name { color: var(--primary-color-dark); }
+        .admin-badge {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--admin-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
         /* Profile Header */
-        .profile-header { 
-            padding: 20px 15px; 
-            display: flex; 
-            align-items: center; 
-            background-color: var(--secondary-bg-light); 
-            border-bottom: 2px solid var(--border-color-light); /* Thicker border */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-        }
-        .dark-theme .profile-header { 
-            background-color: var(--secondary-bg-dark); 
-            border-bottom-color: var(--border-color-dark);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); 
-        }
+        .profile-header { padding: 15px; display: flex; align-items: center; }
         .profile-info { display: flex; align-items: center; gap: 15px; }
-        #user-photo { 
-            width: 60px; 
-            height: 60px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 3px solid var(--primary-color-light); 
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); 
-        }
-        .dark-theme #user-photo { 
-            border-color: var(--primary-color-dark); 
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
-        }
-        .user-details h1 { font-size: 1.3rem; font-weight: 800; }
-        .verified-icon { font-size: 1rem; margin-left: 5px; color: var(--primary-color-light); }
+        #user-photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid; }
+        .light-theme #user-photo { border-color: var(--primary-color-light); }
+        .dark-theme #user-photo { border-color: var(--primary-color-dark); }
+        .user-details h1 { font-size: 1.2rem; font-weight: 700; }
+        .verified-icon { font-size: 1rem; margin-left: 5px; }
+        .light-theme .verified-icon { color: var(--primary-color-light); }
         .dark-theme .verified-icon { color: var(--primary-color-dark); }
-        .user-details p { 
-            font-size: 1rem; 
-            font-weight: 700; 
-            color: var(--primary-color-light); 
+        .user-details p { font-size: 0.9rem; font-weight: 600; }
+        .light-theme .user-details p { color: var(--subtle-text-light); }
+        .dark-theme .user-details p { color: var(--subtle-text-dark); }
+
+        /* Premium Banner */
+        .premium-banner {
+            margin: 10px 15px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9500, #ff5e3a);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
         }
-        .dark-theme .user-details p { color: var(--primary-color-dark); }
+        .premium-banner h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .premium-banner p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        .premium-btn {
+            background-color: white;
+            color: #ff9500;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
         /* Main Content & Pages */
-        main { padding: 20px 15px; }
+        main { padding: 15px; }
         .page { display: none; }
-        .page.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        h2 { font-size: 1.6rem; margin-bottom: 20px; font-weight: 800; }
-
-        /* Card Styles - ENHANCED INTERACTIVITY */
-        .card { 
-            padding: 20px; 
-            border-radius: 16px; 
-            transition: all 0.3s ease-in-out; 
-            box-shadow: var(--shadow-light); 
-            border: 1px solid var(--border-color-light);
-            background-color: var(--secondary-bg-light);
-        }
-        .dark-theme .card {
-            box-shadow: var(--shadow-dark);
-            border: 1px solid var(--border-color-dark);
-            background-color: var(--secondary-bg-dark);
-        }
-        /* Hover Effect for Cards/Tasks */
-        .card:hover:not(#withdraw-form) {
-            transform: translateY(-3px);
-            border-color: var(--primary-color-light);
-        }
-        .dark-theme .card:hover:not(#withdraw-form) {
-            border-color: var(--primary-color-dark);
-        }
+        h2 { font-size: 1.5rem; margin-bottom: 15px; }
 
         /* Home Page Stats & Referral */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .stat-card { text-align: center; } 
-        .stat-card h3 { 
-            font-size: 0.9rem; 
-            margin-bottom: 8px; 
-            color: var(--subtle-text-light); 
-            font-weight: 600;
-        }
+        .stat-card { padding: 20px; border-radius: 12px; text-align: center; }
+        .light-theme .stat-card { background-color: var(--secondary-bg-light); border: 1px solid var(--border-color-light); }
+        .dark-theme .stat-card { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); }
+        .stat-card h3 { font-size: 0.9rem; margin-bottom: 10px; }
+        .light-theme .stat-card h3 { color: var(--subtle-text-light); }
         .dark-theme .stat-card h3 { color: var(--subtle-text-dark); }
-        .stat-card p { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            color: var(--primary-color-light); 
-        }
+        .stat-card p { font-size: 1.5rem; font-weight: 700; }
+        .light-theme .stat-card p { color: var(--primary-color-light); }
         .dark-theme .stat-card p { color: var(--primary-color-dark); }
-        .referral-section { margin-top: 30px; } 
-        .referral-section h3 { text-align: center; font-size: 1.4rem; margin-bottom: 10px; font-weight: 800; }
-        .referral-section p { text-align: center; margin-bottom: 15px; color: var(--subtle-text-light); }
-        .dark-theme .referral-section p { color: var(--subtle-text-dark); }
-        #referral-link { 
-            width: 100%; 
-            padding: 12px; 
-            text-align: center; 
-            border: 2px dashed var(--primary-color-light); 
-            border-radius: 10px; 
-            margin: 15px 0; 
-            font-size: 0.95rem;
-            font-weight: 600;
-            background-color: var(--bg-color-light); 
-            color: var(--text-color-light); 
-            cursor: pointer;
-        }
-        .dark-theme #referral-link { 
-            border-color: var(--primary-color-dark); 
-            background-color: var(--bg-color-dark); 
-            color: var(--text-color-dark); 
-        }
-        #copy-ref-link-btn { 
-            width: 100%; 
-            padding: 14px; 
-            border: none; 
-            border-radius: 10px; 
-            color: #fff; 
-            cursor: pointer; 
-            font-weight: 700;
-            background-color: var(--primary-color-light);
-            transition: background-color 0.2s;
-        }
+        .referral-section { margin-top: 30px; padding: 20px; border-radius: 12px; }
+        .light-theme .referral-section { background-color: var(--secondary-bg-light); border: 1px solid var(--border-color-light); }
+        .dark-theme .referral-section { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); }
+        .referral-section h3 { text-align: center; }
+        #referral-link { width: 100%; padding: 10px; text-align: center; border: 1px dashed; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; }
+        .light-theme #referral-link { border-color: var(--primary-color-light); background-color: var(--bg-color-light); color: var(--text-color-light); }
+        .dark-theme #referral-link { border-color: var(--primary-color-dark); background-color: var(--bg-color-dark); color: var(--text-color-dark); }
+        #copy-ref-link-btn { width: 100%; padding: 12px; border: none; border-radius: 8px; color: #fff; cursor: pointer; font-weight: 600; }
+        .light-theme #copy-ref-link-btn { background-color: var(--primary-color-light); }
         .dark-theme #copy-ref-link-btn { background-color: var(--primary-color-dark); }
-        #copy-ref-link-btn:hover:not(:disabled) { background-color: var(--primary-color-hover-light); }
-        .dark-theme #copy-ref-link-btn:hover:not(:disabled) { background-color: var(--primary-color-hover-dark); }
         
         /* Task/Bonus Container */
-        .task-container { 
-            margin-bottom: 20px; 
-            padding: 25px; 
-        } 
-        .task-icon { font-size: 3.5rem; margin-bottom: 15px; color: var(--primary-color-light); }
+        .task-container { padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+        .task-container:last-child { margin-bottom: 0; }
+        .light-theme .task-container { background-color: var(--secondary-bg-light); border: 1px solid var(--border-color-light); }
+        .dark-theme .task-container { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); }
+        .task-icon { font-size: 3rem; margin-bottom: 15px; }
+        .light-theme .task-icon { color: var(--primary-color-light); }
         .dark-theme .task-icon { color: var(--primary-color-dark); }
-        .task-container h3 { font-size: 1.3rem; margin-bottom: 5px; font-weight: 800; }
-        .task-container p { font-size: 0.95rem; margin-bottom: 20px; color: var(--subtle-text-light); }
+        .task-container h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .task-container p { font-size: 0.9rem; margin-bottom: 20px; }
+        .light-theme .task-container p { color: var(--subtle-text-light); }
         .dark-theme .task-container p { color: var(--subtle-text-dark); }
 
         /* Action Button */
-        .action-btn { 
-            width: 100%; 
-            padding: 16px; 
-            font-size: 1rem; 
-            font-weight: 700; 
-            color: #fff; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            transition: background-color 0.2s, opacity 0.2s; 
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            background-color: var(--primary-color-light);
-        }
+        .action-btn { width: 100%; padding: 15px; font-size: 1rem; font-weight: 700; color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: background-color 0.2s, opacity 0.2s; position: relative; display: flex; justify-content: center; align-items: center; }
+        .light-theme .action-btn { background-color: var(--primary-color-light); }
         .dark-theme .action-btn { background-color: var(--primary-color-dark); }
-        .action-btn:hover:not(:disabled) { background-color: var(--primary-color-hover-light); }
-        .dark-theme .action-btn:hover:not(:disabled) { background-color: var(--primary-color-hover-dark); }
-        .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .action-btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-loader { width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.4); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; display: none; }
         .action-btn.loading .btn-text { visibility: hidden; }
         .action-btn.loading .btn-loader { display: block; position: absolute; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Form Styles */
-        #withdraw-page p { margin-bottom: 15px; color: var(--subtle-text-light); font-weight: 600; }
-        .dark-theme #withdraw-page p { color: var(--subtle-text-dark); }
-
-        #withdraw-form { border: 2px solid var(--border-color-light); }
-        .dark-theme #withdraw-form { border: 2px solid var(--border-color-dark); }
-
-        #withdraw-form .form-group { margin-bottom: 20px; }
-        #withdraw-form label { 
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: 700; 
-            font-size: 0.95rem; 
-        }
-        #withdraw-form input, #withdraw-form select { 
-            width: 100%; 
-            padding: 14px; 
-            border-radius: 10px; 
-            font-family: var(--font-family); 
-            font-size: 1rem; 
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background-color: var(--bg-color-light); 
-            border: 1px solid var(--border-color-light); 
-            color: var(--text-color-light); 
-        }
-        .dark-theme #withdraw-form input, .dark-theme #withdraw-form select { 
-            background-color: var(--secondary-bg-dark); 
-            border: 1px solid var(--border-color-dark); 
-            color: var(--text-color-dark); 
-        }
-        input:focus, select:focus { 
-            outline: none; 
-            border-color: var(--primary-color-light) !important; 
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2); 
-        }
-        .dark-theme input:focus, .dark-theme select:focus { 
-            border-color: var(--primary-color-dark) !important; 
-            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3); 
-        }
+        #withdraw-form .form-group, #deposit-form .form-group { margin-bottom: 15px; }
+        #withdraw-form label, #deposit-form label { display: block; margin-bottom: 5px; font-weight: 600; }
+        #withdraw-form input, #withdraw-form select, #deposit-form input, #deposit-form select { width: 100%; padding: 12px; border-radius: 8px; font-family: var(--font-family); font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .light-theme #withdraw-form input, .light-theme #withdraw-form select, .light-theme #deposit-form input, .light-theme #deposit-form select { background-color: var(--bg-color-light); border: 1px solid var(--border-color-light); color: var(--text-color-light); }
+        .dark-theme #withdraw-form input, .dark-theme #withdraw-form select, .dark-theme #deposit-form input, .dark-theme #deposit-form select { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); color: var(--text-color-dark); }
+        .light-theme input:focus, .light-theme select:focus { outline: none; border-color: var(--primary-color-light); box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15); }
+        .dark-theme input:focus, .dark-theme select:focus { outline: none; border-color: var(--primary-color-dark); box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2); }
         
         /* Bottom Navigation */
-        .bottom-nav { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            max-width: 500px; 
-            margin: 0 auto; 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 8px 0; 
-            border-top: 1px solid var(--border-color-light); 
-            z-index: 1000; 
-            background-color: var(--secondary-bg-light);
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .dark-theme .bottom-nav { 
-            background-color: var(--secondary-bg-dark); 
-            border-top-color: var(--border-color-dark); 
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
-        }
-        .nav-btn { 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 5px 10px; 
-            font-family: var(--font-family); 
-            font-size: 0.75rem; 
-            transition: color 0.2s; 
-            flex-grow: 1;
-            color: var(--subtle-text-light);
-        }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; max-width: 500px; margin: 0 auto; display: flex; justify-content: space-around; padding: 5px 0; border-top: 1px solid; z-index: 1000; }
+        .light-theme .bottom-nav { background-color: var(--secondary-bg-light); border-top-color: var(--border-color-light); }
+        .dark-theme .bottom-nav { background-color: var(--secondary-bg-dark); border-top-color: var(--border-color-dark); }
+        .nav-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; padding: 5px 10px; font-family: var(--font-family); font-size: 0.7rem; transition: color 0.2s; flex-grow: 1; }
+        .light-theme .nav-btn { color: var(--subtle-text-light); }
         .dark-theme .nav-btn { color: var(--subtle-text-dark); }
-        .nav-btn i { font-size: 1.6rem; margin-bottom: 3px; }
-        .nav-btn.active { font-weight: 800; color: var(--primary-color-light); }
+        .nav-btn i { font-size: 1.4rem; margin-bottom: 3px; }
+        .nav-btn.active { font-weight: 700; }
+        .light-theme .nav-btn.active { color: var(--primary-color-light); }
         .dark-theme .nav-btn.active { color: var(--primary-color-dark); }
 
         /* Modal Styles */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
-        .modal-content { 
-            padding: 40px; 
-            border-radius: 20px; 
-            text-align: center;
-            background-color: var(--secondary-bg-light);
-            box-shadow: var(--shadow-light);
-        }
-        .dark-theme .modal-content { 
-            background-color: var(--secondary-bg-dark);
-            box-shadow: var(--shadow-dark);
-        }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); justify-content: center; align-items: center; }
+        .modal-content { padding: 30px; border-radius: 15px; text-align: center; max-width: 90%; width: 400px; }
+        .light-theme .modal-content { background-color: var(--secondary-bg-light); }
+        .dark-theme .modal-content { background-color: var(--secondary-bg-dark); }
         .loader { border: 5px solid #f3f3f3; border-radius: 50%; border-top: 5px solid; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
         .light-theme .loader { border-top-color: var(--primary-color-light); }
         .dark-theme .loader { border-top-color: var(--primary-color-dark); }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+        
+        /* Payment Methods */
+        .payment-methods { display: flex; justify-content: space-between; margin: 15px 0; }
+        .payment-method { flex: 1; text-align: center; padding: 10px; border-radius: 8px; margin: 0 5px; cursor: pointer; transition: all 0.2s; }
+        .payment-method.active { border: 2px solid var(--premium-color); }
+        .light-theme .payment-method { background-color: var(--bg-color-light); border: 1px solid var(--border-color-light); }
+        .dark-theme .payment-method { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); }
+        .payment-icon { font-size: 2rem; margin-bottom: 5px; }
+        .payment-name { font-size: 0.8rem; font-weight: 600; }
+        
+        /* Premium Features List */
+        .premium-features { text-align: left; margin: 20px 0; }
+        .premium-feature { display: flex; align-items: center; margin-bottom: 10px; }
+        .premium-feature i { color: var(--premium-color); margin-right: 10px; }
+        
+        /* Admin Panel Styles */
+        .admin-section { margin-bottom: 20px; }
+        .admin-card { padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .light-theme .admin-card { background-color: var(--secondary-bg-light); border: 1px solid var(--border-color-light); }
+        .dark-theme .admin-card { background-color: var(--secondary-bg-dark); border: 1px solid var(--border-color-dark); }
+        .admin-card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+        .admin-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .admin-stat { text-align: center; padding: 10px; border-radius: 8px; }
+        .light-theme .admin-stat { background-color: var(--bg-color-light); }
+        .dark-theme .admin-stat { background-color: var(--bg-color-dark); }
+        .admin-stat-value { font-size: 1.5rem; font-weight: 700; }
+        .admin-stat-label { font-size: 0.8rem; }
+        
+        .user-list { max-height: 300px; overflow-y: auto; }
+        .user-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid; }
+        .light-theme .user-item { border-bottom-color: var(--border-color-light); }
+        .dark-theme .user-item { border-bottom-color: var(--border-color-dark); }
+        .user-item:last-child { border-bottom: none; }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; }
+        .user-details { flex: 1; }
+        .user-name { font-weight: 600; }
+        .user-id { font-size: 0.8rem; opacity: 0.7; }
+        .user-balance { font-weight: 600; }
+        .user-status { font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; }
+        .status-premium { background-color: var(--premium-color); color: white; }
+        .status-basic { background-color: var(--subtle-text-light); color: white; }
+        
+        .withdraw-list { max-height: 300px; overflow-y: auto; }
+        .withdraw-item { padding: 10px; border-bottom: 1px solid; }
+        .light-theme .withdraw-item { border-bottom-color: var(--border-color-light); }
+        .dark-theme .withdraw-item { border-bottom-color: var(--border-color-dark); }
+        .withdraw-item:last-child { border-bottom: none; }
+        .withdraw-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .withdraw-user { font-weight: 600; }
+        .withdraw-amount { font-weight: 700; }
+        .withdraw-details { font-size: 0.8rem; opacity: 0.7; margin-bottom: 5px; }
+        .withdraw-actions { display: flex; gap: 5px; }
+        .btn { padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.8rem; }
+        .btn-success { background-color: var(--success-color); color: white; }
+        .btn-danger { background-color: var(--danger-color); color: white; }
+        .btn-warning { background-color: var(--warning-color); color: black; }
+        
+        /* Membership Expiry Warning */
+        .membership-warning {
+            background-color: var(--warning-color);
+            color: black;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 15px;
+            text-align: center;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
     <div id="app">
+        <header class="app-header">
+            <h1 class="app-name">Noman Ad Earning</h1>
+            <div id="admin-badge" class="admin-badge" style="display: none;">Admin</div>
+        </header>
+        
+        <div id="membership-warning" class="membership-warning" style="display: none;">
+            আপনার মেম্বারশিপ মেয়াদ শেষ! নতুন মেম্বারশিপ কিনে আবার কাজ করুন।
+        </div>
+
+        <div class="premium-banner">
+            <h3>Go Premium!</h3>
+            <p>Deposit 50 BDT and unlock premium features for 1 week</p>
+            <button class="premium-btn" id="premium-btn">Get Premium</button>
+        </div>
+
         <header class="profile-header">
             <div class="profile-info">
                 <img id="user-photo" src="" alt="User Photo">
@@ -328,19 +312,20 @@
         </header>
 
         <main id="main-content">
+            <!-- Home Page -->
             <div id="home-page" class="page active">
                 <h2>Dashboard</h2>
                 <div class="stats-grid">
-                    <div class="stat-card card">
+                    <div class="stat-card">
                         <h3>Daily Ads Watched</h3>
-                        <p><span id="daily-ads-watched">00</span> / 25</p>
+                        <p><span id="daily-ads-watched">00</span> /  25</p>
                     </div>
-                    <div class="stat-card card">
+                    <div class="stat-card">
                         <h3>Total Referrals</h3>
                         <p id="referral-count">00</p>
                     </div>
                 </div>
-                <div class="referral-section card">
+                <div class="referral-section">
                     <h3>Refer & Earn More!</h3>
                     <p>Share your link to get bonus points.</p>
                     <input type="text" id="referral-link" readonly>
@@ -348,43 +333,39 @@
                 </div>
             </div>
 
+            <!-- Tasks Page -->
             <div id="tasks-page" class="page">
                 <h2>Complete Tasks</h2>
-                <div class="task-container card">
+                <div class="task-container">
                     <i class="fas fa-video task-icon"></i>
                     <h3>Watch a Rewarded Ad</h3>
                     <p>Earn 0.25 TK for every ad.</p>
-                    <button id="watch-ad-btn" class="action-btn">
-                        <span class="btn-text">Watch Ad</span>
-                        <span class="btn-loader"></span>
-                    </button>
+                    <button id="watch-ad-btn" class="action-btn">Watch Ad</button>
                 </div>
-                <div class="task-container card">
+                <div class="task-container">
                     <i class="fab fa-telegram task-icon"></i>
                     <h3>Join Our Channel</h3>
                     <p>Get ৳10 bonus.</p>
-                    <button id="join-channel-btn" class="action-btn">
-                        <span class="btn-text">Join & Claim Bonus</span>
-                        <span class="btn-loader"></span>
-                    </button>
+                    <button id="join-channel-btn" class="action-btn">Join & Claim Bonus</button>
                 </div>
-                <div class="task-container card">
+                <div class="task-container">
                     <i class="fas fa-users task-icon"></i>
                     <h3>Join Our Group</h3>
                     <p>Get ৳2 bonus.</p>
-                    <button id="join-group-btn" class="action-btn">
-                        <span class="btn-text">Join & Claim Bonus</span>
-                        <span class="btn-loader"></span>
-                    </button>
+                    <button id="join-group-btn" class="action-btn">Join & Claim Bonus</button>
                 </div>
             </div>
             
+            <!-- Withdraw Page -->
             <div id="withdraw-page" class="page">
                 <h2>Withdraw</h2>
                 <p>Minimum 50 TK required to withdraw.</p>
-                <form id="withdraw-form" class="card">
+                <p id="commission-notice" style="font-size: 0.8rem; color: var(--warning-color); margin-bottom: 10px;">
+                    Note: 5% commission will be deducted from your withdrawal amount.
+                </p>
+                <form id="withdraw-form">
                     <div class="form-group">
-                        <label for="withdraw-method">Payment Method:</label>
+                        <label for="withdraw-method">Method:</label>
                         <select id="withdraw-method" required>
                             <option value="Bkash">Bkash</option>
                             <option value="Nagad">Nagad</option>
@@ -396,8 +377,13 @@
                         <input type="text" id="account-number" placeholder="e.g., 012345..." required>
                     </div>
                     <div class="form-group">
-                        <label for="amount">Amount to Withdraw (Taka):</label>
-                        <input type="number" id="amount" placeholder="e.g., 50" required>
+                        <label for="amount">Taka to Withdraw:</label>
+                        <input type="number" id="amount" placeholder="e.g., 02" required>
+                    </div>
+                    <div class="form-group">
+                        <p id="net-amount" style="font-size: 0.9rem; text-align: center; padding: 5px; border-radius: 5px; background-color: rgba(0,0,0,0.05);">
+                            Net amount after 5% commission: ৳<span id="net-amount-value">0</span> TK
+                        </p>
                     </div>
                     <button type="submit" id="withdraw-submit-btn" class="action-btn">
                         <span class="btn-text">Submit Request</span>
@@ -405,12 +391,121 @@
                     </button>
                 </form>
             </div>
+            
+            <!-- Deposit Page -->
+            <div id="deposit-page" class="page">
+                <h2>Deposit for Premium</h2>
+                <p>Deposit 50 BDT to activate premium membership for 1 week and unlock exclusive features.</p>
+                
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="bkash">
+                        <i class="fas fa-mobile-alt payment-icon"></i>
+                        <div class="payment-name">Bkash</div>
+                    </div>
+                    <div class="payment-method" data-method="nagad">
+                        <i class="fas fa-wallet payment-icon"></i>
+                        <div class="payment-name">Nagad</div>
+                    </div>
+                    <div class="payment-method" data-method="wpay">
+                        <i class="fas fa-qrcode payment-icon"></i>
+                        <div class="payment-name">wPay</div>
+                    </div>
+                </div>
+                
+                <form id="deposit-form">
+                    <div class="form-group">
+                        <label for="deposit-amount">Amount (BDT):</label>
+                        <input type="number" id="deposit-amount" value="50" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="sender-number">Your Number:</label>
+                        <input type="text" id="sender-number" placeholder="e.g., 01XXXXXXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transaction-id">Transaction ID:</label>
+                        <input type="text" id="transaction-id" placeholder="Enter transaction ID" required>
+                    </div>
+                    <button type="submit" id="deposit-submit-btn" class="action-btn">
+                        <span class="btn-text">Submit Deposit</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+                
+                <div class="premium-features">
+                    <h3>Premium Features:</h3>
+                    <div class="premium-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Higher earning rates</span>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Exclusive tasks</span>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Priority withdrawals</span>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No daily limits</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin Panel -->
+            <div id="admin-page" class="page">
+                <h2>Admin Panel</h2>
+                
+                <div class="admin-section">
+                    <div class="admin-card">
+                        <h3>System Statistics</h3>
+                        <div class="admin-stats">
+                            <div class="admin-stat">
+                                <div class="admin-stat-value" id="total-users">0</div>
+                                <div class="admin-stat-label">Total Users</div>
+                            </div>
+                            <div class="admin-stat">
+                                <div class="admin-stat-value" id="premium-users">0</div>
+                                <div class="admin-stat-label">Premium Users</div>
+                            </div>
+                            <div class="admin-stat">
+                                <div class="admin-stat-value" id="total-withdrawals">0</div>
+                                <div class="admin-stat-label">Total Withdrawals</div>
+                            </div>
+                            <div class="admin-stat">
+                                <div class="admin-stat-value" id="pending-withdrawals">0</div>
+                                <div class="admin-stat-label">Pending Withdrawals</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <div class="admin-card">
+                        <h3>User Management</h3>
+                        <div class="user-list" id="user-list">
+                            <!-- User list will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <div class="admin-card">
+                        <h3>Withdrawal Requests</h3>
+                        <div class="withdraw-list" id="withdraw-list">
+                            <!-- Withdrawal requests will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <nav class="bottom-nav">
             <button class="nav-btn active" data-page="home-page"><i class="fas fa-home"></i><span>Home</span></button>
             <button class="nav-btn" data-page="tasks-page"><i class="fas fa-tasks"></i><span>Tasks</span></button>
             <button class="nav-btn" data-page="withdraw-page"><i class="fas fa-wallet"></i><span>Withdraw</span></button>
+            <button class="nav-btn" data-page="deposit-page"><i class="fas fa-crown"></i><span>Premium</span></button>
+            <button class="nav-btn" data-page="admin-page" id="admin-nav-btn" style="display: none;"><i class="fas fa-user-shield"></i><span>Admin</span></button>
         </nav>
     </div>
 
@@ -418,8 +513,20 @@
         <div class="modal-content"><div class="loader"></div><p>Loading Ad...</p></div>
     </div>
     
+    <!-- Deposit Instructions Modal -->
+    <div id="deposit-instructions-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="payment-method-name">Deposit Instructions</h3>
+            <div id="payment-instructions">
+                <!-- Instructions will be populated here -->
+            </div>
+            <button id="confirm-deposit-btn" class="action-btn" style="margin-top: 15px;">I've Sent the Payment</button>
+        </div>
+    </div>
+    
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src='//libtl.com/sdk.js' data-zone='10166143' data-sdk='show_10166143'></script>
+    <script src='//libtl.com/sdk.js' data-zone='10158150' data-sdk='show_10158150'></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -427,15 +534,35 @@
 
             // --- Configuration ---
             const BOT_TOKEN = "7329447644:AAE573sR_TVmehZ2EERb7bou_1T5bKjp3Zg";
-            const BOT_USERNAME = "@emuappbot"; // Your bot's username
+            const BOT_USERNAME = "@emuappbot";
             const ADMIN_CHAT_ID = "1178065322";
             const CHANNEL_LINK = "https://t.me/EmuCommunity";
-            const GROUP_LINK = "https://t.me/metapro1245";
+            const GROUP_LINK = "https://t.me/Nomanethicalhacker";
             const DAILY_AD_LIMIT = 25;
             const POINTS_PER_AD = 0.25;
             const CHANNEL_JOIN_BONUS = 10;
             const GROUP_JOIN_BONUS = 02;
             const MIN_WITHDRAW_POINTS = 50;
+            const COMMISSION_RATE = 0.05; // 5% commission
+            
+            // Payment details
+            const PAYMENT_DETAILS = {
+                bkash: {
+                    name: "Bkash",
+                    number: "01700909089",
+                    instructions: "1. Go to your bKash app<br>2. Select 'Send Money'<br>3. Enter number: <strong>01869325626</strong><br>4. Enter amount: <strong>50 BDT</strong><br>5. Enter your PIN<br>6. Copy the transaction ID"
+                },
+                nagad: {
+                    name: "Nagad",
+                    number: "01700909089",
+                    instructions: "1. Go to your Nagad app<br>2. Select 'Send Money'<br>3. Enter number: <strong>01869325626</strong><br>4. Enter amount: <strong>50 BDT</strong><br>5. Enter your PIN<br>6. Copy the transaction ID"
+                },
+                wpay: {
+                    name: "wPay",
+                    number: "01700909089",
+                    instructions: "1. Go to your wPay app<br>2. Select 'Send Money'<br>3. Enter number: <strong>01869325626</strong><br>4. Enter amount: <strong>50 BDT</strong><br>5. Enter your PIN<br>6. Copy the transaction ID"
+                }
+            };
 
             // --- DOM Elements ---
             const userPhotoElem = document.getElementById('user-photo');
@@ -451,6 +578,26 @@
             const referralLinkElem = document.getElementById('referral-link');
             const copyRefLinkBtn = document.getElementById('copy-ref-link-btn');
             const loadingModal = document.getElementById('loading-modal');
+            const premiumBtn = document.getElementById('premium-btn');
+            const depositInstructionsModal = document.getElementById('deposit-instructions-modal');
+            const paymentInstructionsElem = document.getElementById('payment-instructions');
+            const paymentMethodNameElem = document.getElementById('payment-method-name');
+            const confirmDepositBtn = document.getElementById('confirm-deposit-btn');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const depositForm = document.getElementById('deposit-form');
+            const depositSubmitBtn = document.getElementById('deposit-submit-btn');
+            const adminBadge = document.getElementById('admin-badge');
+            const adminNavBtn = document.getElementById('admin-nav-btn');
+            const membershipWarning = document.getElementById('membership-warning');
+            const netAmountValue = document.getElementById('net-amount-value');
+            const amountInput = document.getElementById('amount');
+            const userList = document.getElementById('user-list');
+            const withdrawList = document.getElementById('withdraw-list');
+            const totalUsersElem = document.getElementById('total-users');
+            const premiumUsersElem = document.getElementById('premium-users');
+            const totalWithdrawalsElem = document.getElementById('total-withdrawals');
+            const pendingWithdrawalsElem = document.getElementById('pending-withdrawals');
 
             // --- State Management ---
             let userState = {
@@ -459,14 +606,25 @@
                 lastAdWatchDate: null,
                 referrals: [],
                 hasJoinedChannel: false,
-                hasJoinedGroup: false, // New state for group join
-                userId: null
+                hasJoinedGroup: false,
+                userId: null,
+                isPremium: false,
+                membershipExpiry: null,
+                isAdmin: false
+            };
+
+            // Global state for admin panel
+            let adminState = {
+                users: [],
+                withdrawals: []
             };
 
             const saveState = () => {
                 if(userState.userId) {
                     localStorage.setItem(`userState_${userState.userId}`, JSON.stringify(userState));
                 }
+                // Save admin state separately
+                localStorage.setItem('adminState', JSON.stringify(adminState));
             };
 
             const loadState = (userId) => {
@@ -475,6 +633,15 @@
                     userState = JSON.parse(savedState);
                     // Ensure new state properties exist
                     if (userState.hasJoinedGroup === undefined) userState.hasJoinedGroup = false;
+                    if (userState.isPremium === undefined) userState.isPremium = false;
+                    if (userState.membershipExpiry === undefined) userState.membershipExpiry = null;
+                    if (userState.isAdmin === undefined) userState.isAdmin = false;
+                }
+                
+                // Load admin state
+                const savedAdminState = localStorage.getItem('adminState');
+                if (savedAdminState) {
+                    adminState = JSON.parse(savedAdminState);
                 }
             };
             
@@ -491,6 +658,9 @@
                 }
                 
                 userState.userId = user.id;
+                // Check if user is admin
+                userState.isAdmin = (user.id.toString() === ADMIN_CHAT_ID);
+                
                 loadState(user.id);
                 
                 const today = new Date().toISOString().slice(0, 10);
@@ -499,10 +669,26 @@
                     userState.lastAdWatchDate = today;
                 }
                 
+                // Check membership expiry
+                checkMembershipExpiry();
+                
                 updateUI();
                 setupNavigation();
                 setupEventListeners();
                 saveState();
+            };
+            
+            const checkMembershipExpiry = () => {
+                if (userState.isPremium && userState.membershipExpiry) {
+                    const now = new Date();
+                    const expiry = new Date(userState.membershipExpiry);
+                    if (now > expiry) {
+                        userState.isPremium = false;
+                        membershipWarning.style.display = 'block';
+                    } else {
+                        membershipWarning.style.display = 'none';
+                    }
+                }
             };
             
             const updateUI = () => {
@@ -512,7 +698,7 @@
                     userNameElem.innerHTML = `${user.first_name || ''} ${user.last_name || ''} <i class="fas fa-check-circle verified-icon"></i>`;
                 }
                 
-                userPointsElem.textContent = userState.points.toFixed(2); // Display points with 2 decimal places
+                userPointsElem.textContent = userState.points;
                 dailyAdsWatchedElem.textContent = userState.dailyAdWatchCount;
                 referralCountElem.textContent = userState.referrals.length;
 
@@ -522,45 +708,83 @@
                 if (userState.hasJoinedChannel) {
                     joinChannelBtn.textContent = 'Bonus Claimed';
                     joinChannelBtn.disabled = true;
-                    joinChannelBtn.classList.add('disabled');
-                } else {
-                    joinChannelBtn.textContent = 'Join & Claim Bonus';
-                    joinChannelBtn.disabled = false;
-                    joinChannelBtn.classList.remove('disabled');
                 }
                 if (userState.hasJoinedGroup) {
                     joinGroupBtn.textContent = 'Bonus Claimed';
                     joinGroupBtn.disabled = true;
-                    joinGroupBtn.classList.add('disabled');
-                } else {
-                    joinGroupBtn.textContent = 'Join & Claim Bonus';
-                    joinGroupBtn.disabled = false;
-                    joinGroupBtn.classList.remove('disabled');
                 }
+                
+                // Update premium status
+                if (userState.isPremium) {
+                    premiumBtn.textContent = 'Premium Active';
+                    premiumBtn.disabled = true;
+                    document.querySelector('.premium-banner').style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                }
+                
+                // Show admin features if user is admin
+                if (userState.isAdmin) {
+                    adminBadge.style.display = 'block';
+                    adminNavBtn.style.display = 'flex';
+                    updateAdminPanel();
+                }
+                
+                // Update commission calculation
+                updateCommissionCalculation();
+            };
+            
+            const updateCommissionCalculation = () => {
+                const amount = parseFloat(amountInput.value) || 0;
+                const commission = amount * COMMISSION_RATE;
+                const netAmount = amount - commission;
+                netAmountValue.textContent = netAmount.toFixed(2);
             };
             
             const setupEventListeners = () => {
                 watchAdBtn.addEventListener('click', handleWatchAd);
                 joinChannelBtn.addEventListener('click', handleJoinChannel);
-                joinGroupBtn.addEventListener('click', handleJoinGroup); 
+                joinGroupBtn.addEventListener('click', handleJoinGroup);
                 withdrawForm.addEventListener('submit', handleWithdraw);
                 copyRefLinkBtn.addEventListener('click', copyReferralLink);
-                referralLinkElem.addEventListener('click', copyReferralLink);
+                premiumBtn.addEventListener('click', showDepositInstructions);
+                closeModalBtn.addEventListener('click', () => {
+                    depositInstructionsModal.style.display = 'none';
+                });
+                confirmDepositBtn.addEventListener('click', () => {
+                    depositInstructionsModal.style.display = 'none';
+                    // Navigate to deposit page
+                    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                    document.getElementById('deposit-page').classList.add('active');
+                    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-page="deposit-page"]').classList.add('active');
+                });
+                
+                // Payment method selection
+                paymentMethods.forEach(method => {
+                    method.addEventListener('click', () => {
+                        paymentMethods.forEach(m => m.classList.remove('active'));
+                        method.classList.add('active');
+                    });
+                });
+                
+                // Deposit form submission
+                depositForm.addEventListener('submit', handleDeposit);
+                
+                // Commission calculation on amount change
+                amountInput.addEventListener('input', updateCommissionCalculation);
             };
 
             const handleWatchAd = () => {
+                if (!userState.isPremium) {
+                    tg.showAlert("You need premium membership to watch ads. Please purchase premium first.");
+                    return;
+                }
+                
                 if (userState.dailyAdWatchCount >= DAILY_AD_LIMIT) {
                     tg.showAlert("You have reached your daily ad watch limit."); return;
                 }
-                watchAdBtn.disabled = true;
-                watchAdBtn.classList.add('loading');
                 loadingModal.style.display = 'flex';
-                
-                // Show Ad
-                const adPromise = window.show_10166143 ? show_10166143() : Promise.reject("Ad script not loaded");
-
-                adPromise.then(() => {
-                    userState.points = parseFloat((userState.points + POINTS_PER_AD).toFixed(2));
+                show_10158150().then(() => {
+                    userState.points += POINTS_PER_AD;
                     userState.dailyAdWatchCount++;
                     saveState();
                     updateUI();
@@ -568,22 +792,23 @@
                     tg.showAlert(`Congratulations! You've earned ${POINTS_PER_AD} taka.`);
                 }).catch(() => {
                     tg.showAlert("Ad could not be loaded. Please try again later.");
-                    tg.HapticFeedback.notificationOccurred('error'); // Added haptic feedback for error
                 }).finally(() => {
                     loadingModal.style.display = 'none';
-                    watchAdBtn.disabled = false;
-                    watchAdBtn.classList.remove('loading');
                 });
             };
             
             const handleJoinChannel = () => {
+                if (!userState.isPremium) {
+                    tg.showAlert("You need premium membership to complete tasks. Please purchase premium first.");
+                    return;
+                }
+                
                 if(userState.hasJoinedChannel) {
                     tg.showAlert('You have already claimed this bonus.'); return;
                 }
                 tg.openTelegramLink(CHANNEL_LINK);
-                // NOTE: In a real app, this should check the user's membership status on the server
                 setTimeout(() => {
-                    userState.points = parseFloat((userState.points + CHANNEL_JOIN_BONUS).toFixed(2));
+                    userState.points += CHANNEL_JOIN_BONUS;
                     userState.hasJoinedChannel = true;
                     tg.showAlert(`Thank you! You received ${CHANNEL_JOIN_BONUS} bonus taka.`);
                     saveState();
@@ -592,13 +817,17 @@
             };
 
             const handleJoinGroup = () => {
+                if (!userState.isPremium) {
+                    tg.showAlert("You need premium membership to complete tasks. Please purchase premium first.");
+                    return;
+                }
+                
                 if(userState.hasJoinedGroup) {
                     tg.showAlert('You have already claimed this bonus.'); return;
                 }
                 tg.openTelegramLink(GROUP_LINK);
-                // NOTE: In a real app, this should check the user's membership status on the server
                 setTimeout(() => {
-                    userState.points = parseFloat((userState.points + GROUP_JOIN_BONUS).toFixed(2));
+                    userState.points += GROUP_JOIN_BONUS;
                     userState.hasJoinedGroup = true;
                     tg.showAlert(`Thank you! You received ${GROUP_JOIN_BONUS} bonus taka.`);
                     saveState();
@@ -608,24 +837,52 @@
 
             const handleWithdraw = async (e) => {
                 e.preventDefault();
+                
+                if (!userState.isPremium) {
+                    tg.showAlert("You need premium membership to withdraw. Please purchase premium first.");
+                    return;
+                }
+                
                 const method = document.getElementById('withdraw-method').value;
                 const accountNumber = document.getElementById('account-number').value;
                 const amount = parseInt(document.getElementById('amount').value, 10);
 
                 if (isNaN(amount) || amount <= 0) { tg.showAlert("Please enter a valid amount."); return; }
-                if (amount < MIN_WITHDRAW_POINTS) { tg.showAlert(`Minimum withdrawal is ${MIN_WITHDRAW_POINTS} Taka.`); return; }
+                if (amount < MIN_WITHDRAW_POINTS) { tg.showAlert(`Minimum withdrawal is ${MIN_WITHDRAW_POINTS} points.`); return; }
                 if (amount > userState.points) { tg.showAlert("You don't have enough balance."); return; }
 
                 withdrawSubmitBtn.classList.add('loading');
                 withdrawSubmitBtn.disabled = true;
 
-                // Deduct points immediately (Revert on failure)
-                userState.points = parseFloat((userState.points - amount).toFixed(2));
+                // Calculate commission
+                const commission = amount * COMMISSION_RATE;
+                const netAmount = amount - commission;
+                
+                // Create withdrawal request
+                const withdrawalRequest = {
+                    id: Date.now().toString(),
+                    userId: userState.userId,
+                    userName: `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`,
+                    userPhoto: tg.initDataUnsafe.user.photo_url,
+                    method: method,
+                    accountNumber: accountNumber,
+                    amount: amount,
+                    commission: commission,
+                    netAmount: netAmount,
+                    status: 'pending',
+                    date: new Date().toISOString()
+                };
+                
+                // Add to admin state
+                adminState.withdrawals.push(withdrawalRequest);
+                
+                userState.points -= amount;
                 saveState();
                 updateUI();
                 
+                // Send notification to admin
                 const user = tg.initDataUnsafe.user;
-                const message = `<b>New Withdraw Request!</b>\n-----------------------------------\n<b>User:</b> ${user.first_name || ''} ${user.last_name || ''} (@${user.username || 'N/A'})\n<b>User ID:</b> <code>${user.id}</code>\n-----------------------------------\n<b>Method:</b> ${method}\n<b>Account:</b> <code>${accountNumber}</code>\n<b>Amount:</b> ${amount} TK\n-----------------------------------\n<b>Date:</b> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Dhaka' })}`;
+                const message = `<b>New Withdraw Request!</b>\n-----------------------------------\n<b>User:</b> ${user.first_name || ''} ${user.last_name || ''} (@${user.username || 'N/A'})\n<b>User ID:</b> <code>${user.id}</code>\n-----------------------------------\n<b>Method:</b> ${method}\n<b>Account:</b> <code>${accountNumber}</code>\n<b>Amount:</b> ${amount} Points\n<b>Commission (5%):</b> ${commission.toFixed(2)} Points\n<b>Net Amount:</b> ${netAmount.toFixed(2)} Points\n-----------------------------------\n<b>Date:</b> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Dhaka' })}`;
                 
                 const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
                 try {
@@ -637,14 +894,16 @@
                     const result = await response.json();
                     if (result.ok) {
                         tg.HapticFeedback.notificationOccurred('success');
-                        tg.showAlert("Withdrawal request submitted successfully!");
+                        tg.showAlert("Withdrawal request submitted successfully! It will be processed within 24 hours.");
                         withdrawForm.reset();
+                        updateCommissionCalculation();
                     } else { throw new Error(result.description); }
                 } catch (error) {
                     tg.HapticFeedback.notificationOccurred('error');
                     tg.showAlert("Failed to submit request. Your points have been returned.");
-                    // Revert points
-                    userState.points = parseFloat((userState.points + amount).toFixed(2));
+                    userState.points += amount;
+                    // Remove withdrawal request
+                    adminState.withdrawals = adminState.withdrawals.filter(w => w.id !== withdrawalRequest.id);
                     saveState();
                     updateUI();
                 } finally {
@@ -659,6 +918,201 @@
                     tg.showAlert("Referral link copied!");
                 });
             };
+            
+            const showDepositInstructions = () => {
+                if (userState.isPremium) {
+                    tg.showAlert("You already have premium membership!");
+                    return;
+                }
+                
+                const selectedMethod = document.querySelector('.payment-method.active').dataset.method;
+                const paymentInfo = PAYMENT_DETAILS[selectedMethod];
+                
+                paymentMethodNameElem.textContent = `${paymentInfo.name} Deposit Instructions`;
+                paymentInstructionsElem.innerHTML = paymentInfo.instructions;
+                
+                depositInstructionsModal.style.display = 'flex';
+            };
+            
+            const handleDeposit = async (e) => {
+                e.preventDefault();
+                
+                if (userState.isPremium) {
+                    tg.showAlert("You already have premium membership!");
+                    return;
+                }
+                
+                const selectedMethod = document.querySelector('.payment-method.active').dataset.method;
+                const paymentInfo = PAYMENT_DETAILS[selectedMethod];
+                const senderNumber = document.getElementById('sender-number').value;
+                const transactionId = document.getElementById('transaction-id').value;
+                
+                if (!senderNumber || !transactionId) {
+                    tg.showAlert("Please fill in all fields.");
+                    return;
+                }
+                
+                depositSubmitBtn.classList.add('loading');
+                depositSubmitBtn.disabled = true;
+                
+                // Activate premium membership for 1 week
+                const expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + 7); // 1 week from now
+                userState.isPremium = true;
+                userState.membershipExpiry = expiryDate.toISOString();
+                
+                // Add user to admin state if not already there
+                const user = tg.initDataUnsafe.user;
+                const userExists = adminState.users.find(u => u.id === user.id);
+                if (!userExists) {
+                    adminState.users.push({
+                        id: user.id,
+                        name: `${user.first_name || ''} ${user.last_name || ''}`,
+                        photo: user.photo_url,
+                        isPremium: true,
+                        membershipExpiry: expiryDate.toISOString(),
+                        balance: userState.points,
+                        joinDate: new Date().toISOString()
+                    });
+                } else {
+                    // Update existing user
+                    const userIndex = adminState.users.findIndex(u => u.id === user.id);
+                    adminState.users[userIndex].isPremium = true;
+                    adminState.users[userIndex].membershipExpiry = expiryDate.toISOString();
+                }
+                
+                saveState();
+                updateUI();
+                
+                // Send notification to admin
+                const message = `<b>New Premium Deposit Request!</b>\n-----------------------------------\n<b>User:</b> ${user.first_name || ''} ${user.last_name || ''} (@${user.username || 'N/A'})\n<b>User ID:</b> <code>${user.id}</code>\n-----------------------------------\n<b>Method:</b> ${paymentInfo.name}\n<b>Sender Number:</b> <code>${senderNumber}</code>\n<b>Transaction ID:</b> <code>${transactionId}</code>\n<b>Amount:</b> 50 BDT\n<b>Membership Expiry:</b> ${expiryDate.toLocaleDateString('en-US', { timeZone: 'Asia/Dhaka' })}\n-----------------------------------\n<b>Date:</b> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Dhaka' })}`;
+                
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: message, parse_mode: 'HTML'})
+                    });
+                    const result = await response.json();
+                    if (result.ok) {
+                        tg.HapticFeedback.notificationOccurred('success');
+                        tg.showAlert("Deposit request submitted! Your premium membership is now active for 1 week.");
+                        depositForm.reset();
+                    } else { throw new Error(result.description); }
+                } catch (error) {
+                    tg.HapticFeedback.notificationOccurred('error');
+                    tg.showAlert("Failed to submit deposit request. Please try again.");
+                    // Revert premium status if failed
+                    userState.isPremium = false;
+                    userState.membershipExpiry = null;
+                    saveState();
+                    updateUI();
+                } finally {
+                    depositSubmitBtn.classList.remove('loading');
+                    depositSubmitBtn.disabled = false;
+                }
+            };
+            
+            const updateAdminPanel = () => {
+                if (!userState.isAdmin) return;
+                
+                // Update statistics
+                totalUsersElem.textContent = adminState.users.length;
+                premiumUsersElem.textContent = adminState.users.filter(u => u.isPremium).length;
+                totalWithdrawalsElem.textContent = adminState.withdrawals.length;
+                pendingWithdrawalsElem.textContent = adminState.withdrawals.filter(w => w.status === 'pending').length;
+                
+                // Update user list
+                userList.innerHTML = '';
+                adminState.users.forEach(user => {
+                    const userItem = document.createElement('div');
+                    userItem.className = 'user-item';
+                    
+                    const isExpired = user.membershipExpiry && new Date() > new Date(user.membershipExpiry);
+                    
+                    userItem.innerHTML = `
+                        <div class="user-info">
+                            <img src="${user.photo || 'https://i.imgur.com/placeholder.png'}" alt="User Avatar" class="user-avatar">
+                            <div class="user-details">
+                                <div class="user-name">${user.name}</div>
+                                <div class="user-id">ID: ${user.id}</div>
+                            </div>
+                        </div>
+                        <div class="user-balance">${user.balance || 0} TK</div>
+                        <div class="user-status ${user.isPremium && !isExpired ? 'status-premium' : 'status-basic'}">
+                            ${user.isPremium && !isExpired ? 'Premium' : 'Basic'}
+                        </div>
+                    `;
+                    
+                    userList.appendChild(userItem);
+                });
+                
+                // Update withdrawal list
+                withdrawList.innerHTML = '';
+                adminState.withdrawals.forEach(withdrawal => {
+                    const withdrawItem = document.createElement('div');
+                    withdrawItem.className = 'withdraw-item';
+                    
+                    const statusColor = withdrawal.status === 'approved' ? 'var(--success-color)' : 
+                                      withdrawal.status === 'rejected' ? 'var(--danger-color)' : 'var(--warning-color)';
+                    
+                    withdrawItem.innerHTML = `
+                        <div class="withdraw-header">
+                            <div class="withdraw-user">${withdrawal.userName}</div>
+                            <div class="withdraw-amount" style="color: ${statusColor}">${withdrawal.amount} TK</div>
+                        </div>
+                        <div class="withdraw-details">
+                            ${withdrawal.method} - ${withdrawal.accountNumber}<br>
+                            Net: ${withdrawal.netAmount.toFixed(2)} TK (Commission: ${withdrawal.commission.toFixed(2)} TK)<br>
+                            ${new Date(withdrawal.date).toLocaleString()}
+                        </div>
+                        <div class="withdraw-actions">
+                            ${withdrawal.status === 'pending' ? `
+                                <button class="btn btn-success" onclick="approveWithdrawal('${withdrawal.id}')">Approve</button>
+                                <button class="btn btn-danger" onclick="rejectWithdrawal('${withdrawal.id}')">Reject</button>
+                            ` : `
+                                <span style="color: ${statusColor}; font-weight: 600;">${withdrawal.status.toUpperCase()}</span>
+                            `}
+                        </div>
+                    `;
+                    
+                    withdrawList.appendChild(withdrawItem);
+                });
+            };
+            
+            // Admin functions (these would be called from the admin panel)
+            window.approveWithdrawal = (withdrawalId) => {
+                const withdrawal = adminState.withdrawals.find(w => w.id === withdrawalId);
+                if (withdrawal) {
+                    withdrawal.status = 'approved';
+                    saveState();
+                    updateAdminPanel();
+                    tg.showAlert(`Withdrawal approved! ${withdrawal.netAmount.toFixed(2)} TK sent to user.`);
+                    
+                    // In a real app, you would automatically send the money here
+                    // For demo, we'll just show a message
+                }
+            };
+            
+            window.rejectWithdrawal = (withdrawalId) => {
+                const withdrawal = adminState.withdrawals.find(w => w.id === withdrawalId);
+                if (withdrawal) {
+                    // Return points to user
+                    const userStateKey = `userState_${withdrawal.userId}`;
+                    const userStateStr = localStorage.getItem(userStateKey);
+                    if (userStateStr) {
+                        const userState = JSON.parse(userStateStr);
+                        userState.points += withdrawal.amount;
+                        localStorage.setItem(userStateKey, JSON.stringify(userState));
+                    }
+                    
+                    withdrawal.status = 'rejected';
+                    saveState();
+                    updateAdminPanel();
+                    tg.showAlert("Withdrawal rejected! Points returned to user.");
+                }
+            };
 
             const setupNavigation = () => {
                 const navButtons = document.querySelectorAll('.nav-btn');
@@ -670,6 +1124,11 @@
                         document.getElementById(pageId).classList.add('active');
                         navButtons.forEach(btn => btn.classList.remove('active'));
                         button.classList.add('active');
+                        
+                        // Update admin panel if needed
+                        if (pageId === 'admin-page' && userState.isAdmin) {
+                            updateAdminPanel();
+                        }
                     });
                 });
             };
