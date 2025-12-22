@@ -263,7 +263,7 @@
     const MIN_WITHDRAW = 250;
     const TASK_REWARD = 100;
     const channelId = "-1003269548576";
-    const botToken = "7659172754:AAHaJ1Me6cmSWKLOAhpdMSUU93YiZGGERhE";
+    const botToken = "7329447644:AAE573sR_TVmehZ2EERb7bou_1T5bKjp3Zg";
 
     const app = document.getElementById('app');
     const tg = window.Telegram.WebApp;
@@ -660,14 +660,14 @@
     }
     
     function copyReferralLink() {
-      const referLink = `https://t.me/techfisms_bot?start=${user.id}`;
+      const referLink = `https://t.me/emuappbot?start=${user.id}`;
       navigator.clipboard.writeText(referLink).then(() => {
         showNotification('Copied!', 'Referral link copied to clipboard');
       });
     }
     
     function shareReferralLink() {
-      const referLink = `https://t.me/minitaskearn_bot?start=${user.id}`;
+      const referLink = `https://t.me/emuappbot?start=${user.id}`;
       if (navigator.share) {
         navigator.share({
           title: 'Bost Fi V20 - Earn Money',
